@@ -1,0 +1,181 @@
+---
+---
+
+<!-- Pre-Paint Head Script: Guarantees Overlay Displays BEFORE Page Paint (Zero Homepage Flash) -->
+<script is:inline>
+  (function() {
+    try {
+      var isFirstVisit = !sessionStorage.getItem('visited_site');
+      var playIntro = sessionStorage.getItem('play_intro') === 'true';
+      var skipIntro = sessionStorage.getItem('skip_intro') === 'true';
+
+      if ((isFirstVisit || playIntro) && !skipIntro) {
+        document.documentElement.classList.add('intro-active');
+      }
+    } catch (e) {}
+  })();
+</script>
+
+<style>
+  html.intro-active #split-entrance-overlay {
+    display: block !important;
+  }
+</style>
+
+<div
+  id="split-entrance-overlay"
+  class="fixed inset-0 z-[999999] pointer-events-auto overflow-hidden hidden bg-charcoal"
+>
+  <!-- Center Seam Gold Glow Line -->
+  <div
+    id="split-seam-line"
+    class="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[3px] bg-gradient-to-b from-transparent via-gold to-transparent z-30 shadow-[0_0_35px_rgba(212,175,55,1)] transition-opacity duration-700 pointer-events-none"
+  ></div>
+
+  <!-- Center Crest Emblem Badge (15% Larger Logo Size with Steady Border Edge Glow) -->
+  <div
+    id="split-seam-badge"
+    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 flex flex-col items-center gap-3.5 transition-all duration-500 transform scale-100 opacity-100 pointer-events-none"
+  >
+    <div class="relative w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-charcoal/90 border-2 border-gold p-3 flex items-center justify-center shadow-[0_0_45px_rgba(212,175,55,0.9),inset_0_0_25px_rgba(212,175,55,0.4)] ring-2 ring-gold/50">
+      <img
+        src="/images/anandham_logo.webp"
+        alt="Anandham Catters Emblem"
+        class="w-full h-full object-contain filter drop-shadow-xl"
+      />
+    </div>
+    <span class="text-xs sm:text-sm uppercase tracking-[0.35em] text-gold font-bold bg-black/85 backdrop-blur-md px-7 py-2 rounded-full border border-gold/60 shadow-2xl">
+      ANANDHAM CATTERS
+    </span>
+  </div>
+
+  <!-- Left Split Half (0% to 50.5% width of screen) - Perfectly Mapped 100vw Frame -->
+  <div
+    id="split-curtain-left"
+    class="absolute top-0 bottom-0 left-0 w-[50.5%] bg-charcoal overflow-hidden border-r border-gold/50 shadow-2xl transition-transform duration-[1250ms] ease-[cubic-bezier(0.77,0,0.175,1)]"
+  >
+    <div class="relative w-[100vw] h-full">
+      <img
+        src="/images/intro.webp"
+        alt="Intro Split Entrance"
+        class="w-full h-full object-cover"
+      />
+    </div>
+  </div>
+
+  <!-- Right Split Half (50% to 100.5% width of screen) - Perfectly Mapped 100vw Frame (-50vw shift) -->
+  <div
+    id="split-curtain-right"
+    class="absolute top-0 bottom-0 right-0 w-[50.5%] bg-charcoal overflow-hidden border-l border-gold/50 shadow-2xl transition-transform duration-[1250ms] ease-[cubic-bezier(0.77,0,0.175,1)]"
+  >
+    <div class="relative w-[100vw] h-full -ml-[50vw]">
+      <img
+        src="/images/intro.webp"
+        alt="Intro Split Entrance"
+        class="w-full h-full object-cover"
+      />
+    </div>
+  </div>
+</div>
+
+<script>
+  // Split Open Entrance Controller
+  document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.getElementById('split-entrance-overlay');
+    const curtainLeft = document.getElementById('split-curtain-left');
+    const curtainRight = document.getElementById('split-curtain-right');
+    const seamLine = document.getElementById('split-seam-line');
+    const seamBadge = document.getElementById('split-seam-badge');
+
+    const isFirstVisit = !sessionStorage.getItem('visited_site');
+    const playIntro = sessionStorage.getItem('play_intro') === 'true';
+    const skipIntro = sessionStorage.getItem('skip_intro') === 'true';
+
+    // Check if animation should trigger
+    if ((isFirstVisit || playIntro) && !skipIntro) {
+      sessionStorage.setItem('visited_site', 'true');
+      sessionStorage.removeItem('play_intro');
+
+      if (overlay) {
+        overlay.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+
+        // Hold full view for 1 second (1000ms) before parting curtains
+        setTimeout(() => {
+          // 1. Fade out center crest badge & seam line
+          if (seamBadge) {
+            seamBadge.style.opacity = '0';
+            seamBadge.style.transform = 'translate(-50%, -50%) scale(0.85)';
+          }
+          if (seamLine) {
+            seamLine.style.opacity = '0';
+          }
+
+          // 2. Part open left & right curtains after badge fades
+          setTimeout(() => {
+            if (curtainLeft) curtainLeft.style.transform = 'translateX(-100%)';
+            if (curtainRight) curtainRight.style.transform = 'translateX(100%)';
+
+            // 3. Remove overlay from DOM flow once animation finishes (1250ms)
+            setTimeout(() => {
+              overlay.classList.add('hidden');
+              document.body.style.overflow = '';
+              document.documentElement.classList.remove('intro-active');
+            }, 1250);
+          }, 300);
+        }, 1000);
+      }
+    } else {
+      sessionStorage.removeItem('skip_intro');
+      document.documentElement.classList.remove('intro-active');
+    }
+
+    // Attach click listeners to all Logo Links for zero-refresh instant split animation
+    const logoLinks = document.querySelectorAll('[data-logo-link]');
+    logoLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        if (window.location.pathname === '/' || window.location.pathname === '') {
+          e.preventDefault();
+
+          if (overlay && curtainLeft && curtainRight && seamBadge && seamLine) {
+            // Reset overlay state
+            overlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            curtainLeft.style.transform = 'translateX(0)';
+            curtainRight.style.transform = 'translateX(0)';
+            seamBadge.style.opacity = '1';
+            seamBadge.style.transform = 'translate(-50%, -50%) scale(1)';
+            seamLine.style.opacity = '1';
+
+            // Hold for 1 second before parting
+            setTimeout(() => {
+              seamBadge.style.opacity = '0';
+              seamBadge.style.transform = 'translate(-50%, -50%) scale(0.85)';
+              seamLine.style.opacity = '0';
+
+              setTimeout(() => {
+                curtainLeft.style.transform = 'translateX(-100%)';
+                curtainRight.style.transform = 'translateX(100%)';
+
+                setTimeout(() => {
+                  overlay.classList.add('hidden');
+                  document.body.style.overflow = '';
+                }, 1250);
+              }, 300);
+            }, 1000);
+          }
+        } else {
+          sessionStorage.setItem('play_intro', 'true');
+        }
+      });
+    });
+
+    // Home link direct navigation (bypass intro)
+    const homeLinks = document.querySelectorAll('[data-home-link]');
+    homeLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        sessionStorage.setItem('skip_intro', 'true');
+      });
+    });
+  });
+</script>

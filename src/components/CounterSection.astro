@@ -1,0 +1,30 @@
+---
+import { SITE_CONFIG } from '../lib/siteConfig';
+---
+
+<section class="py-6 sm:py-10 bg-ivory relative border-y border-gold/20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-xl mx-auto mb-4 sm:mb-6">
+      <span class="text-[9px] sm:text-[11px] uppercase tracking-[0.25em] text-gold font-semibold block mb-0.5">
+        Pillars of Excellence
+      </span>
+      <h2 class="font-editorial text-xl sm:text-3xl text-charcoal font-normal">
+        A Legacy of Trust & Culinary Perfection
+      </h2>
+    </div>
+
+    <!-- Compact Sleek Stat Tiles Grid (Slim & Not Stout) -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
+      {SITE_CONFIG.stats.map((stat) => (
+        <div class="text-center py-2.5 px-3 sm:py-4 sm:px-5 rounded-xl bg-ivory-deep/40 border border-gold/30 shadow-sm relative overflow-hidden group hover:border-gold/60 transition-all duration-300">
+          <div class="font-editorial text-lg sm:text-3xl font-semibold text-gold tracking-tight leading-none mb-0.5">
+            {stat.value}
+          </div>
+          <p class="text-[8px] sm:text-[10px] uppercase tracking-[0.15em] text-charcoal-light font-bold">
+            {stat.label}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

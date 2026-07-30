@@ -1,0 +1,267 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE_CONFIG } from '../lib/siteConfig';
+
+const TIMELINE_MILESTONES = [
+  {
+    year: '2010',
+    title: 'Inception in Erode',
+    desc: 'Founded with a singular mission: to elevate South Indian wedding catering into a royal sensory feast.'
+  },
+  {
+    year: '2012',
+    title: 'Coastal Branch Launch',
+    desc: 'Established our Thoothukudi logistics hub to serve coastal marriages and grand beachside receptions.'
+  },
+  {
+    year: '2013',
+    title: 'Madurai Regional Command',
+    desc: 'Expanded into Madurai Othakadai, scaling operations to handle multi-thousand guest banquets seamlessly.'
+  },
+  {
+    year: '2021',
+    title: 'Chettinad Hub & Live Stalls',
+    desc: 'Opened Karaikudi branch and launched 19+ interactive live food counters & dessert islands.'
+  },
+  {
+    year: 'Present',
+    title: '1.5 Lakh+ Celebrations',
+    desc: 'Tamil Nadu’s most trusted catering brand, serving over 500 million delighted guests statewide.'
+  }
+];
+
+const elangoPhoneRaw = SITE_CONFIG.contacts.elango.phoneRaw;
+const whatsappUrl = SITE_CONFIG.whatsappUrl;
+---
+
+<Layout title="About Us — 16+ Years of Culinary Heritage | Anandham Catters">
+  
+  <!-- 1. Ultra-Luxury Breathable Hero Banner with Clear Hall Background (/images/Stall view.png) -->
+  <section class="relative bg-charcoal text-ivory pt-16 pb-8 md:pt-28 md:pb-16 overflow-hidden min-h-[280px] md:min-h-[500px] flex flex-col justify-center">
+    
+    <!-- Background Image Showcase: Clear Dining Hall (/images/Stall view.png) -->
+    <div class="absolute inset-0 z-0">
+      <img
+        src="/images/Stall view.webp"
+        alt="Anandham Catters Grand Hall Setup"
+        class="w-full h-full object-cover filter brightness-[0.68] contrast-[1.08]"
+      />
+      <!-- Soft Gradient Overlay for High Background Image Visibility -->
+      <div class="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-black/35 to-black/50"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-charcoal/70 via-transparent to-charcoal/70"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-3 md:space-y-6 text-center">
+      
+      <!-- Ornate Tagline -->
+      <div class="flex items-center justify-center gap-3">
+        <div class="h-[1px] w-8 md:w-12 bg-gradient-to-r from-transparent via-gold/60 to-gold"></div>
+        <span class="text-[8px] md:text-[10px] uppercase tracking-[0.25em] md:tracking-[0.32em] text-gold font-bold flex items-center gap-1 md:gap-1.5 drop-shadow-[0_2px_8px_rgba(0,0,0,1)]">
+          <span>◇</span> SINCE 2010 • CULINARY EXCELLENCE <span>◇</span>
+        </span>
+        <div class="h-[1px] w-8 md:w-12 bg-gradient-to-l from-transparent via-gold/60 to-gold"></div>
+      </div>
+
+      <h1 class="font-editorial text-2xl md:text-6xl lg:text-7xl font-light tracking-tight leading-none max-w-4xl mx-auto drop-shadow-[0_4px_16px_rgba(0,0,0,1)]">
+        Crafting Royal Feasts & <span class="italic text-gold">Timeless Celebrations</span>
+      </h1>
+
+      <p class="text-xs sm:text-base text-ivory max-w-2xl mx-auto font-light leading-relaxed drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
+        For over 16 years, Anandham Catters has transformed grand South Indian weddings, VIP banquets, and state celebrations into extraordinary culinary memories.
+      </p>
+
+      <!-- Key Stats Ribbon -->
+      <div class="pt-3 md:pt-4 grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3.5 max-w-3xl mx-auto">
+        <div class="p-2.5 md:p-3.5 rounded-xl md:rounded-2xl bg-black/75 border border-gold/40 backdrop-blur-md shadow-2xl">
+          <span class="font-editorial text-lg md:text-3xl text-gold font-normal block drop-shadow">16+</span>
+          <span class="text-[9px] uppercase tracking-wider text-ivory/90 block font-semibold pt-0.5">Years Legacy</span>
+        </div>
+
+        <div class="p-2.5 md:p-3.5 rounded-xl md:rounded-2xl bg-black/75 border border-gold/40 backdrop-blur-md shadow-2xl">
+          <span class="font-editorial text-lg md:text-3xl text-gold font-normal block drop-shadow">1.5L+</span>
+          <span class="text-[9px] uppercase tracking-wider text-ivory/90 block font-semibold pt-0.5">Events Catered</span>
+        </div>
+
+        <div class="p-2.5 md:p-3.5 rounded-xl md:rounded-2xl bg-black/75 border border-gold/40 backdrop-blur-md shadow-2xl">
+          <span class="font-editorial text-lg md:text-3xl text-gold font-normal block drop-shadow">500M+</span>
+          <span class="text-[9px] uppercase tracking-wider text-ivory/90 block font-semibold pt-0.5">Guests Delighted</span>
+        </div>
+
+        <div class="p-2.5 md:p-3.5 rounded-xl md:rounded-2xl bg-black/75 border border-gold/40 backdrop-blur-md shadow-2xl">
+          <span class="font-editorial text-lg md:text-3xl text-gold font-normal block drop-shadow">38</span>
+          <span class="text-[9px] uppercase tracking-wider text-ivory/90 block font-semibold pt-0.5">Districts Served</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 2. Parchment-Gold Luxury Editorial Section ("The Anandham Philosophy") matching Mockup 100% -->
+  <section class="bg-[#F8F5EE] py-8 md:py-16 border-y border-gold/30 relative overflow-hidden">
+    
+    <!-- Subtle Vintage Heritage Skyline Watermark Effect -->
+    <div class="absolute bottom-0 left-0 w-80 h-32 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:16px_16px] opacity-15 pointer-events-none"></div>
+
+    <div class="max-w-6xl mx-auto px-3 md:px-6 lg:px-8 space-y-6 md:space-y-10 relative z-10">
+      
+      <!-- Editorial Section Header -->
+      <div class="text-center space-y-2">
+        <div class="flex items-center justify-center gap-3">
+          <div class="h-[1px] w-10 bg-gradient-to-r from-transparent via-gold/60 to-gold-dark"></div>
+          <span class="text-[10px] uppercase tracking-[0.32em] text-gold-dark font-bold flex items-center gap-1.5">
+            <span>◇</span> THE ANANDHAM PHILOSOPHY <span>◇</span>
+          </span>
+          <div class="h-[1px] w-10 bg-gradient-to-l from-transparent via-gold/60 to-gold-dark"></div>
+        </div>
+
+        <h2 class="font-editorial text-2xl md:text-5xl font-light text-charcoal leading-tight">
+          Rooted in Tradition, <span class="italic text-[#8B1A2B]">Engineered for Perfection</span>
+        </h2>
+      </div>
+
+      <!-- 2-Story Narrative Column Layout with Oval Badges & Crimson Headings (100% Mockup Match) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-12 pt-1 md:pt-2 items-start">
+        
+        <!-- Story 01 -->
+        <div class="space-y-3">
+          <div class="flex items-center gap-3">
+            <span class="px-3.5 py-1 rounded-full border border-gold-dark/60 bg-gold/15 text-gold-dark font-editorial text-sm font-bold shadow-sm">
+              01
+            </span>
+            <h3 class="font-editorial text-sm sm:text-base font-bold uppercase tracking-wider text-[#8B1A2B]">
+              STATEWIDE LEGACY SINCE 2010
+            </h3>
+          </div>
+          <p class="text-xs sm:text-sm text-charcoal-light font-light leading-relaxed pl-1">
+            Established in 2010 in Erode, <strong class="text-charcoal font-semibold">Anandham Catters</strong> emerged from a passion for authentic South Indian gastronomy and royal banquet hospitality. What began as a dedicated culinary service has grown into a statewide catering force operating across Erode, Madurai, Thoothukudi, and Karaikudi.
+          </p>
+        </div>
+
+        <!-- Story 02 with Vertical Gold Left Divider Line & Cursive Signature -->
+        <div class="space-y-3 md:border-l border-gold/40 md:pl-8">
+          <div class="flex items-center gap-3">
+            <span class="px-3.5 py-1 rounded-full border border-gold-dark/60 bg-gold/15 text-gold-dark font-editorial text-sm font-bold shadow-sm">
+              02
+            </span>
+            <h3 class="font-editorial text-sm sm:text-base font-bold uppercase tracking-wider text-[#8B1A2B]">
+              MASTER CULINARY PRECISION
+            </h3>
+          </div>
+          <p class="text-xs sm:text-sm text-charcoal-light font-light leading-relaxed pl-1">
+            From our signature 26-dish traditional banana leaf Virundhu to 19+ live food counters, dessert islands, and botanical juice bars, every single dish is executed with master chef precision, zero-preservative pure ingredients, and zero-wait hospitality.
+          </p>
+
+          <!-- Handwritten Cursive Touch -->
+          <span class="block text-xs font-editorial italic text-charcoal/80 pt-2 font-medium">
+            — Crafted to Perfection
+          </span>
+        </div>
+
+      </div>
+
+      <!-- Ornate Dual Subtitle Pill CTA Buttons (100% Mockup Match, Clean Button Text) -->
+      <div class="pt-3 md:pt-4 flex flex-wrap justify-center gap-2.5 md:gap-4">
+        
+        <!-- Reserve Date Button: WITHOUT phone number in button text -->
+        <a
+          href={`tel:${elangoPhoneRaw}`}
+          class="bg-gradient-to-r from-[#70121F] via-[#8B1A2B] to-[#5C0E19] text-white py-2.5 px-4 md:py-3.5 md:px-6 rounded-full font-bold shadow-2xl flex items-center gap-2 md:gap-3 border border-gold/40 hover:scale-[1.03] transition-all text-left"
+        >
+          <div class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-black/20 flex items-center justify-center shrink-0">
+            <svg class="w-3 h-3 md:w-4 md:h-4 text-gold fill-current" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          </div>
+          <div>
+            <span class="text-[10px] md:text-xs uppercase tracking-wider font-bold block leading-tight">RESERVE YOUR DATE</span>
+            <span class="text-[9px] md:text-[10px] text-gold/90 font-light block pt-0.5">Let's Create Something Unforgettable</span>
+          </div>
+        </a>
+
+        <!-- WhatsApp Button -->
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-gradient-to-r from-[#1B8A44] via-[#25D366] to-[#126932] text-white py-2.5 px-4 md:py-3.5 md:px-6 rounded-full font-bold shadow-2xl flex items-center gap-2 md:gap-3 border border-emerald-300/40 hover:scale-[1.03] transition-all text-left"
+        >
+          <div class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-black/20 flex items-center justify-center shrink-0">
+            <svg class="w-3 h-3 md:w-4 md:h-4 text-white fill-current" viewBox="0 0 24 24"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.944 9.944 0 001.341 5.011l-1.42 5.187 5.308-1.392a9.92 9.92 0 004.761 1.22h.005c5.507 0 9.99-4.478 9.99-9.985 0-2.667-1.038-5.175-2.925-7.062A9.914 9.914 0 0012.012 2zm.005 1.674c4.582 0 8.311 3.729 8.312 8.31a8.275 8.275 0 01-2.44 5.882 8.28 8.28 0 01-5.872 2.435h-.004a8.246 8.246 0 01-3.987-1.026l-.286-.17-2.96.776.79-2.885-.186-.296A8.257 8.257 0 013.696 11.984c0-4.581 3.73-8.31 8.321-8.31zm-3.666 4.385c-.205 0-.441.077-.672.333-.23.256-.88.86-.88 2.097 0 1.237.9 2.43 1.028 2.602.128.172 1.77 2.703 4.29 3.791 2.52 1.088 2.52.725 2.98.679.46-.046 1.482-.605 1.687-1.19.204-.585.204-1.085.143-1.189-.062-.104-.231-.167-.487-.295-.256-.128-1.482-.731-1.712-.815-.23-.084-.397-.128-.564.128-.166.256-.64.814-.784.978-.144.164-.287.185-.543.057-.256-.128-1.081-.399-2.06-1.272-.76-.678-1.274-1.515-1.423-1.771-.149-.256-.016-.394.112-.521.115-.115.256-.298.384-.447.128-.149.171-.256.256-.425.085-.17.043-.32-.021-.448-.064-.128-.564-1.36-.773-1.862-.204-.489-.411-.423-.564-.43-.145-.008-.311-.008-.477-.008z"/></svg>
+          </div>
+          <div>
+            <span class="text-[10px] md:text-xs uppercase tracking-wider font-bold block leading-tight">WHATSAPP DISCUSSION</span>
+            <span class="text-[9px] md:text-[10px] text-white/90 font-light block pt-0.5">Let's Plan Your Perfect Event</span>
+          </div>
+        </a>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 3. Interactive Motion Timeline Marquee (2010 -> Present) -->
+  <section class="bg-charcoal text-ivory py-12 md:py-24 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-3 md:px-6 lg:px-8 space-y-6 md:space-y-10 relative z-10">
+      
+      <div class="text-center max-w-2xl mx-auto space-y-2">
+        <span class="text-xs uppercase tracking-[0.28em] text-gold font-bold block">
+          16 YEARS OF CONTINUOUS GROWTH
+        </span>
+        <h2 class="font-editorial text-2xl md:text-5xl font-light text-ivory">
+          Our Remarkable <span class="italic text-gold">Journey</span>
+        </h2>
+        <p class="text-xs text-ivory/70 font-light leading-relaxed">
+          Hover over any milestone card below to pause motion and explore our story.
+        </p>
+      </div>
+
+      <!-- Animated Continuous Infinite Motion Slider Container -->
+      <div class="relative overflow-hidden w-full group py-4">
+        
+        <!-- Left & Right Gradient Blur Masks -->
+        <div class="absolute top-0 bottom-0 left-0 w-12 md:w-24 bg-gradient-to-r from-charcoal via-charcoal/80 to-transparent z-20 pointer-events-none"></div>
+        <div class="absolute top-0 bottom-0 right-0 w-12 md:w-24 bg-gradient-to-l from-charcoal via-charcoal/80 to-transparent z-20 pointer-events-none"></div>
+
+        <!-- Continuous Infinite Marquee Motion Track -->
+        <div class="flex gap-6 w-max animate-timeline-marquee group-hover:[animation-play-state:paused] pointer-events-auto">
+          {[...TIMELINE_MILESTONES, ...TIMELINE_MILESTONES, ...TIMELINE_MILESTONES].map((m) => (
+            <div class="w-[230px] md:w-[320px] shrink-0 p-4 md:p-7 rounded-2xl md:rounded-3xl bg-charcoal-card border border-gold/30 space-y-2 md:space-y-3 relative hover:border-gold hover:-translate-y-2 hover:bg-gold/10 transition-all duration-300 group/card shadow-xl backdrop-blur-lg cursor-pointer">
+              
+              <!-- Connected Glowing Gold Year Badge & Node -->
+              <div class="flex items-center justify-between border-b border-gold/20 pb-3">
+                <span class="text-xs uppercase font-bold tracking-widest text-gold bg-gold/15 px-3 py-1 rounded-full border border-gold/40 inline-block shadow-sm">
+                  {m.year}
+                </span>
+                <span class="w-2.5 h-2.5 rounded-full bg-gold animate-ping group-hover/card:scale-150 transition-transform"></span>
+              </div>
+
+              <h3 class="font-editorial text-base md:text-2xl text-ivory font-normal group-hover/card:text-gold transition-colors leading-snug">
+                {m.title}
+              </h3>
+              
+              <p class="text-xs text-ivory/75 font-light leading-relaxed">
+                {m.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  @keyframes timelineMarquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-33.333%);
+    }
+  }
+
+  .animate-timeline-marquee {
+    animation: timelineMarquee 26s linear infinite;
+  }
+</style>

@@ -1,0 +1,261 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE_CONFIG } from '../lib/siteConfig';
+import { STALL_CATEGORIES } from '../lib/images';
+
+const FILTER_PILLS = [
+  { id: 'all', name: 'All Stalls' },
+  { id: 'interactive', name: 'Interactive' },
+  { id: 'juice', name: 'Juices & Coolers' },
+  { id: 'fruits', name: 'Fruit Islands' },
+  { id: 'paan', name: 'Live Paan' },
+];
+---
+
+<Layout title="Live Food Stalls — Anandham Catters">
+  <!-- 1. Hero Banner Section -->
+  <!-- 1. Hero Banner Section (Compact on Mobile) -->
+  <section class="bg-charcoal text-ivory pt-14 pb-4 md:pt-20 md:pb-8 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-1.5 md:space-y-2 text-center">
+      <span class="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-gold font-medium block">
+        Interactive Culinary Theater
+      </span>
+      <h1 class="font-editorial text-2xl md:text-5xl font-light">
+        Live Food <span class="italic text-gold">Stalls</span>
+      </h1>
+      <p class="text-[11px] md:text-xs text-ivory/80 max-w-xl mx-auto font-light leading-relaxed">
+        Sizzling hot, made-to-order culinary counters and artisan interactive food stations for your event.
+      </p>
+
+      <div class="pt-1.5 md:pt-2 flex flex-wrap items-center justify-center gap-2 md:gap-3">
+        <a
+          href={`tel:${SITE_CONFIG.contacts.krishnan.phone1Raw}`}
+          class="bg-crimson hover:bg-crimson-hover text-ivory text-[10px] md:text-[11px] uppercase tracking-[0.18em] px-4 py-2 md:px-6 md:py-2.5 rounded-full font-medium transition-all shadow-md flex items-center gap-2"
+        >
+          <span>Call Us</span>
+        </a>
+
+        <a
+          href={SITE_CONFIG.whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-[#25D366] text-white text-[10px] md:text-[11px] uppercase tracking-[0.18em] px-4 py-2 md:px-6 md:py-2.5 rounded-full font-medium transition-all shadow-md flex items-center gap-2"
+        >
+          <span>WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Sticky Compact Category Filter Bar (Scrollable on Mobile, Centered on Desktop) -->
+  <div class="sticky top-[44px] md:top-14 z-40 bg-ivory-card shadow-md py-2 md:py-3 border-b border-gold/40">
+    <nav
+      aria-label="Filter Live Stall Categories"
+      class="max-w-4xl mx-auto flex items-center md:justify-center gap-1.5 md:gap-3 px-3 md:px-4 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+    >
+      {FILTER_PILLS.map((pill, index) => (
+        <button
+          data-stall-filter={pill.id}
+          class={`stall-filter-pill relative px-3 md:px-4.5 py-1 md:py-2 rounded-full text-[9px] md:text-xs font-bold uppercase tracking-wider md:tracking-widest transition-all duration-300 cursor-pointer whitespace-nowrap ${
+            index === 0
+              ? 'active bg-charcoal text-gold border border-gold/50 shadow-md ring-1 ring-gold/40 scale-105'
+              : 'text-charcoal-dark hover:text-crimson hover:bg-gold/10 border border-charcoal/15 scale-100'
+          }`}
+        >
+          <span>{pill.name}</span>
+        </button>
+      ))}
+    </nav>
+  </div>
+
+  <!-- 3. Main Stall Categories Gallery Section with Smooth Transitions -->
+  <!-- 3. Main Stall Categories Gallery Section (Compact on Mobile) -->
+  <section class="max-w-7xl mx-auto px-3 md:px-6 lg:px-8 pt-5 md:pt-8 pb-10 md:pb-16">
+    {STALL_CATEGORIES.map((category) => {
+      // Map category ID to filter slug
+      let filterGroup = 'interactive';
+      if (category.id === 'beverages-juices') filterGroup = 'juice';
+      if (category.id === 'fruit-carving') filterGroup = 'fruits';
+      if (category.id === 'paan-beeda') filterGroup = 'paan';
+
+      return (
+        <div
+          data-stall-category={filterGroup}
+          class="stall-category-block transition-all duration-500 ease-out mb-8 md:mb-16 pt-1 md:pt-2"
+        >
+          <!-- Category Heading & Collection Counter -->
+          <div class="border-b border-gold/30 pb-1.5 md:pb-2.5 mb-3 md:mb-5 flex items-end justify-between gap-2 md:gap-4">
+            <h2 class="font-editorial text-lg md:text-4xl text-charcoal font-normal leading-tight">
+              {category.name}
+            </h2>
+            
+            <!-- Collection Counter -->
+            <span class="text-[9px] md:text-xs uppercase tracking-[0.18em] text-gold-dark font-bold whitespace-nowrap pb-0.5 md:pb-1">
+              {category.stalls.length} Items
+            </span>
+          </div>
+
+          <!-- Photo Grid: 2-col on mobile, 3-col on desktop -->
+          <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2.5 md:gap-6">
+            {category.stalls.map((stall) => (
+              <div
+                data-lightbox-trigger
+                data-src={stall.src}
+                data-title={stall.title}
+                data-tag={category.name}
+                class="relative group overflow-hidden rounded-xl md:rounded-2xl border border-gold/30 shadow-lg hover:shadow-2xl transition-all duration-500 bg-charcoal aspect-[4/3] cursor-pointer"
+              >
+                <img
+                  src={stall.src}
+                  alt={stall.title}
+                  class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
+
+                <div class="absolute bottom-0 left-0 right-0 p-2.5 md:p-5 text-ivory flex items-end justify-between gap-1.5 md:gap-3">
+                  <div class="space-y-0.5 md:space-y-1 min-w-0">
+                    <span class="text-[8px] md:text-[10px] uppercase tracking-[0.18em] md:tracking-[0.22em] text-gold font-medium block drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] truncate">
+                      {category.name}
+                    </span>
+                    <h3 class="font-editorial text-xs md:text-2xl text-ivory font-normal leading-snug drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] line-clamp-2">
+                      {stall.title}
+                    </h3>
+                  </div>
+
+                  <!-- Gold Circular Arrow Button -->
+                  <div class="w-6 h-6 md:w-9 md:h-9 rounded-full border border-gold/60 bg-black/40 backdrop-blur-md flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-charcoal group-hover:border-gold transition-all duration-300 shrink-0 shadow-md">
+                    <svg class="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      );
+    })}
+  </section>
+
+  <!-- Full-Screen Lightbox Modal -->
+  <div
+    id="lightbox-modal"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-xl opacity-0 pointer-events-none transition-all duration-300 p-4 sm:p-8"
+  >
+    <button
+      id="lightbox-close"
+      aria-label="Close Lightbox"
+      class="absolute top-6 right-6 z-50 text-ivory/80 hover:text-gold text-4xl font-light w-12 h-12 flex items-center justify-center rounded-full bg-charcoal/80 border border-gold/40 transition-colors cursor-pointer"
+    >
+      ✕
+    </button>
+
+    <div class="relative max-w-5xl w-full max-h-[90vh] flex flex-col items-center justify-center space-y-4">
+      <div class="relative w-full max-h-[78vh] flex items-center justify-center overflow-hidden rounded-2xl border border-gold/40 shadow-2xl">
+        <img
+          id="lightbox-img"
+          src=""
+          alt=""
+          class="max-w-full max-h-[78vh] object-contain rounded-2xl"
+        />
+      </div>
+
+      <div class="text-center space-y-1">
+        <span id="lightbox-tag" class="text-[11px] uppercase tracking-[0.25em] text-gold font-medium block"></span>
+        <h3 id="lightbox-title" class="font-editorial text-2xl sm:text-3xl text-ivory font-normal"></h3>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // High-Contrast Pill Filter Tab Script with Smooth Fade & Scale Transition
+  const filterPills = document.querySelectorAll('[data-stall-filter]');
+  const categoryBlocks = document.querySelectorAll('[data-stall-category]');
+
+  filterPills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      const filterId = (pill as HTMLElement).dataset.stallFilter;
+
+      // Update Pill Button Active States with Subtle Scale Pulse
+      filterPills.forEach((p) => {
+        if ((p as HTMLElement).dataset.stallFilter === filterId) {
+          p.className =
+            'stall-filter-pill relative px-3 md:px-4.5 py-1 md:py-2 rounded-full text-[9px] md:text-xs font-bold uppercase tracking-wider md:tracking-widest transition-all duration-300 cursor-pointer whitespace-nowrap active bg-charcoal text-gold border border-gold/50 shadow-md ring-1 ring-gold/40 scale-105';
+        } else {
+          p.className =
+            'stall-filter-pill relative px-3 md:px-4.5 py-1 md:py-2 rounded-full text-[9px] md:text-xs font-bold uppercase tracking-wider md:tracking-widest transition-all duration-300 cursor-pointer whitespace-nowrap text-charcoal-dark hover:text-crimson hover:bg-gold/10 border border-charcoal/15 scale-100';
+        }
+      });
+
+      // Smooth Fade & Scale Transition for Category Blocks
+      categoryBlocks.forEach((block) => {
+        const catGroup = (block as HTMLElement).dataset.stallCategory;
+        const isMatch = filterId === 'all' || catGroup === filterId;
+
+        // Phase 1: Smooth fade out & scale down
+        (block as HTMLElement).style.transition = 'all 180ms ease-in';
+        (block as HTMLElement).style.opacity = '0';
+        (block as HTMLElement).style.transform = 'scale(0.97)';
+
+        setTimeout(() => {
+          if (isMatch) {
+            (block as HTMLElement).classList.remove('hidden');
+            // Phase 2: Smooth fade in & scale back to normal
+            setTimeout(() => {
+              (block as HTMLElement).style.transition = 'all 380ms cubic-bezier(0.16, 1, 0.3, 1)';
+              (block as HTMLElement).style.opacity = '1';
+              (block as HTMLElement).style.transform = 'scale(1)';
+            }, 30);
+          } else {
+            (block as HTMLElement).classList.add('hidden');
+          }
+        }, 180);
+      });
+    });
+  });
+
+  // Fullscreen Lightbox Modal Script
+  const lightboxModal = document.getElementById('lightbox-modal');
+  const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+  const lightboxTitle = document.getElementById('lightbox-title');
+  const lightboxTag = document.getElementById('lightbox-tag');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const triggers = document.querySelectorAll('[data-lightbox-trigger]');
+
+  triggers.forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const el = trigger as HTMLElement;
+      const src = el.dataset.src || '';
+      const title = el.dataset.title || '';
+      const tag = el.dataset.tag || '';
+
+      if (lightboxImg) lightboxImg.src = src;
+      if (lightboxTitle) lightboxTitle.textContent = title;
+      if (lightboxTag) lightboxTag.textContent = tag;
+
+      lightboxModal?.classList.remove('opacity-0', 'pointer-events-none');
+      lightboxModal?.classList.add('opacity-100');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeLightbox() {
+    lightboxModal?.classList.add('opacity-0', 'pointer-events-none');
+    lightboxModal?.classList.remove('opacity-100');
+    document.body.style.overflow = '';
+  }
+
+  lightboxClose?.addEventListener('click', closeLightbox);
+  lightboxModal?.addEventListener('click', (e) => {
+    if (e.target === lightboxModal) {
+      closeLightbox();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeLightbox();
+    }
+  });
+</script>

@@ -1,0 +1,94 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import CounterSection from '../components/CounterSection.astro';
+import TamilNaduMap from '../components/TamilNaduMap.astro';
+import MasonryGallery from '../components/MasonryGallery.astro';
+import FAQSection from '../components/FAQSection.astro';
+import { SITE_CONFIG } from '../lib/siteConfig';
+---
+
+<Layout title="Anandham Catters — Premier Indian Catering, Buffets & Live Food Stalls">
+  <!-- 1. Hero Section -->
+  <HeroSection />
+
+  <!-- 2. Animated Counter Section -->
+  <CounterSection />
+
+  <!-- 3. Pure Photography Portfolio (Masonry Gallery) -->
+  <section class="py-6 md:py-20 bg-ivory-deep/40 border-y border-gold/20">
+    <div class="max-w-7xl mx-auto px-3 md:px-6 lg:px-8 space-y-4 md:space-y-10">
+      
+      <!-- Header with Gold Accent Line -->
+      <div class="flex flex-row items-center justify-between border-b border-gold/30 pb-2.5 md:pb-5 gap-2">
+        <div class="space-y-0.5 md:space-y-1">
+          <!-- Gold Accent Line -->
+          <div class="flex items-center gap-2">
+            <div class="h-[1px] w-8 md:w-16 bg-gold"></div>
+            <span class="text-[8px] md:text-xs uppercase tracking-[0.2em] md:tracking-[0.25em] text-gold font-medium block">
+              SIGNATURE OFFERINGS
+            </span>
+          </div>
+          <h2 class="font-editorial text-sm md:text-3xl lg:text-4xl font-light text-charcoal leading-snug">
+            Live Stalls & <span class="italic text-crimson">Buffet Concepts</span>
+          </h2>
+        </div>
+        
+        <!-- Compact Explore Button -->
+        <a
+          href="/live-stalls"
+          class="bg-crimson hover:bg-gold text-white hover:text-charcoal text-[9px] md:text-xs uppercase tracking-wider md:tracking-[0.15em] px-3 py-1.5 md:px-6 md:py-2.5 rounded-full font-bold transition-all duration-300 shadow-md flex items-center gap-1.5 shrink-0 ring-1 ring-gold/40"
+        >
+          <span>ALL STALLS</span>
+          <span class="text-xs md:text-sm font-bold">→</span>
+        </a>
+      </div>
+
+      <!-- Masonry Photo Grid -->
+      <MasonryGallery />
+    </div>
+  </section>
+
+  <!-- 4. Interactive Tamil Nadu Map -->
+  <TamilNaduMap />
+
+  <!-- 5. Direct Contact Call & WhatsApp Banner -->
+  <section class="py-6 md:py-16 bg-charcoal text-ivory">
+    <div class="max-w-4xl mx-auto px-4 text-center space-y-3 md:space-y-6">
+      <span class="text-[9px] md:text-xs uppercase tracking-[0.25em] text-gold font-medium block">
+        DIRECT RESERVATIONS
+      </span>
+      <h2 class="font-editorial text-xl md:text-4xl font-light">
+        Book Anandham Catters for Your <span class="italic text-gold">Event</span>
+      </h2>
+      <p class="text-[10px] md:text-xs text-ivory/70 max-w-md mx-auto font-light leading-relaxed">
+        Headquartered in Erode with live stall deployment across all districts in Tamil Nadu.
+      </p>
+
+      <!-- Buttons on SAME HORIZONTAL LINE -->
+      <div class="flex flex-row items-center justify-center gap-2 md:gap-2.5 pt-1.5 md:pt-2">
+        <a
+          href={`tel:${SITE_CONFIG.contacts.krishnan.phone1Raw}`}
+          class="bg-crimson hover:bg-crimson-hover text-white text-[9px] md:text-xs uppercase tracking-wider px-3.5 py-2 md:px-6 md:py-3 rounded-full font-bold transition-all shadow-md flex items-center justify-center gap-1.5 shrink-0"
+        >
+          <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          <span>CALL HOTLINE</span>
+        </a>
+
+        <a
+          href={SITE_CONFIG.whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-[#25D366] hover:bg-[#20ba5a] text-white text-[9px] md:text-xs uppercase tracking-wider px-3.5 py-2 md:px-6 md:py-3 rounded-full font-bold transition-all shadow-md flex items-center justify-center gap-1.5 shrink-0"
+        >
+          <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.944 9.944 0 001.341 5.011l-1.42 5.187 5.308-1.392a9.92 9.92 0 004.761 1.22h.005c5.507 0 9.99-4.478 9.99-9.985 0-2.667-1.038-5.175-2.925-7.062A9.914 9.914 0 0012.012 2zm.005 1.674c4.582 0 8.311 3.729 8.312 8.31a8.275 8.275 0 01-2.44 5.882 8.28 8.28 0 01-5.872 2.435h-.004a8.246 8.246 0 01-3.987-1.026l-.286-.17-2.96.776.79-2.885-.186-.296A8.257 8.257 0 013.696 11.984c0-4.581 3.73-8.31 8.321-8.31zm-3.666 4.385c-.205 0-.441.077-.672.333-.23.256-.88.86-.88 2.097 0 1.237.9 2.43 1.028 2.602.128.172 1.77 2.703 4.29 3.791 2.52 1.088 2.52.725 2.98.679.46-.046 1.482-.605 1.687-1.19.204-.585.204-1.085.143-1.189-.062-.104-.231-.167-.487-.295-.256-.128-1.482-.731-1.712-.815-.23-.084-.397-.128-.564.128-.166.256-.64.814-.784.978-.144.164-.287.185-.543.057-.256-.128-1.081-.399-2.06-1.272-.76-.678-1.274-1.515-1.423-1.771-.149-.256-.016-.394.112-.521.115-.115.256-.298.384-.447.128-.149.171-.256.256-.425.085-.17.043-.32-.021-.448-.064-.128-.564-1.36-.773-1.862-.204-.489-.411-.423-.564-.43-.145-.008-.311-.008-.477-.008z"/></svg>
+          <span>WHATSAPP US</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 6. FAQs -->
+  <FAQSection />
+</Layout>

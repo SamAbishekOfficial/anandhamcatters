@@ -1,0 +1,303 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE_CONFIG } from '../lib/siteConfig';
+import { RENTAL_CATEGORIES } from '../lib/images';
+---
+
+<Layout title="Buffet Setups & Equipment Rentals — Anandham Catters">
+  <!-- Compact Dark Header Banner (Mobile Optimized) -->
+  <section class="bg-charcoal text-ivory pt-14 pb-4 md:pt-20 md:pb-8 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-1.5 md:space-y-2 text-center">
+      <span class="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-gold font-medium block">
+        Architectural Event Inventory
+      </span>
+      <h1 class="font-editorial text-2xl md:text-5xl font-light">
+        Buffet Setups & <span class="italic text-gold">Equipment Rentals</span>
+      </h1>
+      <p class="text-[11px] md:text-xs text-ivory/80 max-w-xl mx-auto font-light leading-relaxed">
+        Grand canopy stalls, VVIP banquet chair & table suites, and commercial cooking utility rentals for your event.
+      </p>
+
+      <div class="pt-1.5 md:pt-2 flex flex-wrap items-center justify-center gap-2 md:gap-3">
+        <a
+          href={`tel:${SITE_CONFIG.phoneRaw}`}
+          class="bg-crimson hover:bg-crimson-hover text-ivory text-[10px] md:text-[11px] uppercase tracking-[0.18em] px-4 py-2 md:px-6 md:py-2.5 rounded-full font-medium transition-all shadow-md flex items-center gap-2"
+        >
+          <span>Call Us</span>
+        </a>
+
+        <a
+          href={SITE_CONFIG.whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-[#25D366] text-white text-[10px] md:text-[11px] uppercase tracking-[0.18em] px-4 py-2 md:px-6 md:py-2.5 rounded-full font-medium transition-all shadow-md flex items-center gap-2"
+        >
+          <span>WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Category Selector & Content Section (Compact on Mobile) -->
+  <section class="max-w-7xl mx-auto px-3 md:px-6 lg:px-8 py-5 md:py-8 space-y-5 md:space-y-8">
+    
+    <!-- Ornate Category Header & Equalized 3 Buttons Bar -->
+    <div class="flex flex-col items-center space-y-3 md:space-y-4 max-w-4xl mx-auto w-full">
+      
+      <!-- ◇── EXPLORE RENTAL COLLECTIONS ──◇ -->
+      <div class="flex items-center gap-3 md:gap-4">
+        <div class="h-[1px] w-8 md:w-14 bg-gradient-to-r from-transparent via-gold/50 to-gold"></div>
+        <span class="text-[9px] md:text-[11px] uppercase tracking-[0.22em] md:tracking-[0.28em] text-gold font-semibold flex items-center gap-1.5 md:gap-2">
+          <span class="text-[8px] md:text-[9px]">◇</span> EXPLORE COLLECTIONS <span class="text-[8px] md:text-[9px]">◇</span>
+        </span>
+        <div class="h-[1px] w-8 md:w-14 bg-gradient-to-l from-transparent via-gold/50 to-gold"></div>
+      </div>
+
+      <!-- Equalized Category Buttons Grid (3-col on mobile too, compact) -->
+      <div class="grid grid-cols-3 gap-2 md:gap-4 w-full">
+        {RENTAL_CATEGORIES.map((category, index) => (
+          <button
+            data-rental-tab={category.id}
+            class={`rental-pill-btn relative group flex flex-col md:flex-row items-center justify-center gap-1 md:gap-3 px-2 py-2.5 md:px-5 md:py-3.5 rounded-xl md:rounded-2xl transition-all duration-300 cursor-pointer text-center w-full min-h-[40px] md:min-h-[50px] ${
+              index === 0
+                ? 'active bg-gradient-to-b from-[#B8860B] via-[#9A7215] to-[#785412] text-white border-2 border-[#F3D78A] shadow-[0_10px_25px_rgba(184,134,11,0.45)] ring-1 ring-gold/40 font-bold'
+                : 'bg-ivory-card border border-gold/35 text-charcoal hover:border-gold/70 hover:bg-gold/10 shadow-sm font-semibold'
+            }`}
+          >
+            <!-- Vector SVG Icon -->
+            <span class={`icon-svg shrink-0 transition-colors duration-200 ${index === 0 ? 'text-white' : 'text-gold-dark'}`}>
+              {category.id === 'stall-rental' && (
+                <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 2L2 7h20L12 2zM4 10v9M8 10v9M12 10v9M16 10v9M20 10v9M2 21h20"/>
+                </svg>
+              )}
+              {category.id === 'chair-table-rental' && (
+                <svg class="w-4 h-4 md:w-6 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 6h4v5H3V6zm0 5v10m4-5v5M11 11h10M16 11v10M13 21h6"/>
+                </svg>
+              )}
+              {category.id === 'cooking-rental' && (
+                <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M10 6h4M7 9h10M5 9v8a2 2 0 002 2h10a2 2 0 002-2V9M3 12h2M19 12h2"/>
+                </svg>
+              )}
+            </span>
+
+            <!-- Category Label -->
+            <span class="text-[8px] md:text-xs font-bold uppercase tracking-[0.08em] md:tracking-[0.12em] leading-tight">
+              {category.name}
+            </span>
+          </button>
+        ))}
+      </div>
+
+    </div>
+
+    <!-- Category Content Sections (Photo Cards Grid Directly Under Category Selector Buttons) -->
+    <div class="relative min-h-[400px]">
+      {RENTAL_CATEGORIES.map((category, index) => (
+        <div
+          data-rental-content={category.id}
+          class={`rental-content-section transition-all duration-300 ease-in-out ${
+            index === 0 ? 'block opacity-100 translate-y-0' : 'hidden opacity-0 translate-y-3'
+          }`}
+        >
+          <!-- Photo Overlay Cards Grid -->
+          {category.items.length > 0 && (
+            <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2.5 md:gap-6">
+              {category.items.map((item) => (
+                <div
+                  data-lightbox-trigger
+                  data-src={item.src}
+                  data-title={item.title}
+                  data-tag={item.tag}
+                  class="relative group overflow-hidden rounded-xl md:rounded-2xl border border-gold/30 shadow-lg hover:shadow-2xl transition-all duration-500 bg-charcoal aspect-[4/3] cursor-pointer"
+                >
+                  <img
+                    src={item.src}
+                    alt={item.title}
+                    class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
+
+                  <div class="absolute bottom-0 left-0 right-0 p-2.5 md:p-5 text-ivory flex items-end justify-between gap-1.5 md:gap-3">
+                    <div class="space-y-0.5 md:space-y-1 min-w-0">
+                      <span class="text-[8px] md:text-[10px] uppercase tracking-[0.18em] md:tracking-[0.22em] text-gold font-medium block drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] truncate">
+                        {item.tag}
+                      </span>
+                      <h3 class="font-editorial text-xs md:text-2xl text-ivory font-normal leading-snug drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] line-clamp-2">
+                        {item.title}
+                      </h3>
+                    </div>
+
+                    <!-- Gold Circular Arrow Button -->
+                    <div class="w-6 h-6 md:w-9 md:h-9 rounded-full border border-gold/60 bg-black/40 backdrop-blur-md flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-charcoal group-hover:border-gold transition-all duration-300 shrink-0 shadow-md">
+                      <svg class="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <!-- Coming Soon Container for Empty Cooking Utility Rental -->
+          {category.items.length === 0 && (
+            <div class="max-w-xl mx-auto text-center p-5 md:p-8 rounded-2xl md:rounded-3xl bg-ivory-card border border-gold/40 shadow-lg space-y-2 md:space-y-3">
+              <div class="w-10 h-10 md:w-12 md:h-12 mx-auto rounded-full bg-gold/20 text-gold flex items-center justify-center border border-gold/40">
+                <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M10 6h4M7 9h10M5 9v8a2 2 0 002 2h10a2 2 0 002-2V9M3 12h2M19 12h2"/>
+                </svg>
+              </div>
+              <h3 class="font-editorial text-lg md:text-2xl text-charcoal font-normal">
+                Photos Coming Soon
+              </h3>
+              <p class="text-[11px] md:text-xs text-charcoal-light font-light leading-relaxed">
+                Commercial gas burners, brass samovar urns, traditional copper cauldrons, and live cooking utensils are available for event rental upon request.
+              </p>
+              <div class="pt-1 flex justify-center gap-2 md:gap-3">
+                <a
+                  href={`tel:${SITE_CONFIG.phoneRaw}`}
+                  class="bg-crimson text-ivory text-[10px] md:text-xs uppercase tracking-wider px-4 py-2 md:px-6 md:py-2.5 rounded-full font-medium shadow-md"
+                >
+                  Call
+                </a>
+                <a
+                  href={SITE_CONFIG.whatsappUrl}
+                  target="_blank"
+                  class="bg-[#25D366] text-white text-[10px] md:text-xs uppercase tracking-wider px-4 py-2 md:px-6 md:py-2.5 rounded-full font-medium shadow-md"
+                >
+                  WhatsApp
+                </a>
+              </div>
+            </div>
+          )}
+
+        </div>
+      ))}
+    </div>
+
+  </section>
+
+  <!-- Full-Screen Lightbox Modal -->
+  <div
+    id="lightbox-modal"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-xl opacity-0 pointer-events-none transition-all duration-300 p-4 sm:p-8"
+  >
+    <button
+      id="lightbox-close"
+      aria-label="Close Lightbox"
+      class="absolute top-6 right-6 z-50 text-ivory/80 hover:text-gold text-4xl font-light w-12 h-12 flex items-center justify-center rounded-full bg-charcoal/80 border border-gold/40 transition-colors cursor-pointer"
+    >
+      ✕
+    </button>
+
+    <div class="relative max-w-5xl w-full max-h-[90vh] flex flex-col items-center justify-center space-y-4">
+      <div class="relative w-full max-h-[78vh] flex items-center justify-center overflow-hidden rounded-2xl border border-gold/40 shadow-2xl">
+        <img
+          id="lightbox-img"
+          src=""
+          alt=""
+          class="max-w-full max-h-[78vh] object-contain rounded-2xl"
+        />
+      </div>
+
+      <div class="text-center space-y-1">
+        <span id="lightbox-tag" class="text-[11px] uppercase tracking-[0.25em] text-gold font-medium block"></span>
+        <h3 id="lightbox-title" class="font-editorial text-2xl sm:text-3xl text-ivory font-normal"></h3>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // Tab Switching Script matching equalized button dimensions
+  const tabBtns = document.querySelectorAll('[data-rental-tab]');
+  const contentSections = document.querySelectorAll('[data-rental-content]');
+
+  tabBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const targetId = (btn as HTMLElement).dataset.rentalTab;
+
+      tabBtns.forEach((b) => {
+        const iconSvg = b.querySelector('.icon-svg');
+        if ((b as HTMLElement).dataset.rentalTab === targetId) {
+          b.classList.add('active', 'bg-gradient-to-b', 'from-[#B8860B]', 'via-[#9A7215]', 'to-[#785412]', 'text-white', 'border-2', 'border-[#F3D78A]', 'shadow-[0_10px_25px_rgba(184,134,11,0.45)]', 'ring-1', 'ring-gold/40', 'font-bold');
+          b.classList.remove('bg-ivory-card', 'border-gold/35', 'text-charcoal', 'shadow-sm', 'font-semibold');
+          if (iconSvg) {
+            iconSvg.classList.add('text-white');
+            iconSvg.classList.remove('text-gold-dark');
+          }
+        } else {
+          b.classList.remove('active', 'bg-gradient-to-b', 'from-[#B8860B]', 'via-[#9A7215]', 'to-[#785412]', 'text-white', 'border-2', 'border-[#F3D78A]', 'shadow-[0_10px_25px_rgba(184,134,11,0.45)]', 'ring-1', 'ring-gold/40', 'font-bold');
+          b.classList.add('bg-ivory-card', 'border-gold/35', 'text-charcoal', 'shadow-sm', 'font-semibold');
+          if (iconSvg) {
+            iconSvg.classList.remove('text-white');
+            iconSvg.classList.add('text-gold-dark');
+          }
+        }
+      });
+
+      contentSections.forEach((section) => {
+        const secId = (section as HTMLElement).dataset.rentalContent;
+        if (secId === targetId) {
+          (section as HTMLElement).classList.remove('hidden');
+          setTimeout(() => {
+            (section as HTMLElement).classList.add('opacity-100', 'translate-y-0');
+            (section as HTMLElement).classList.remove('opacity-0', 'translate-y-3');
+          }, 20);
+        } else {
+          (section as HTMLElement).classList.add('opacity-0', 'translate-y-3');
+          (section as HTMLElement).classList.remove('opacity-100', 'translate-y-0');
+          setTimeout(() => {
+            (section as HTMLElement).classList.add('hidden');
+          }, 250);
+        }
+      });
+    });
+  });
+
+  // Fullscreen Lightbox Modal Script
+  const lightboxModal = document.getElementById('lightbox-modal');
+  const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+  const lightboxTitle = document.getElementById('lightbox-title');
+  const lightboxTag = document.getElementById('lightbox-tag');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const triggers = document.querySelectorAll('[data-lightbox-trigger]');
+
+  triggers.forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const el = trigger as HTMLElement;
+      const src = el.dataset.src || '';
+      const title = el.dataset.title || '';
+      const tag = el.dataset.tag || '';
+
+      if (lightboxImg) lightboxImg.src = src;
+      if (lightboxTitle) lightboxTitle.textContent = title;
+      if (lightboxTag) lightboxTag.textContent = tag;
+
+      lightboxModal?.classList.remove('opacity-0', 'pointer-events-none');
+      lightboxModal?.classList.add('opacity-100');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeLightbox() {
+    lightboxModal?.classList.add('opacity-0', 'pointer-events-none');
+    lightboxModal?.classList.remove('opacity-100');
+    document.body.style.overflow = '';
+  }
+
+  lightboxClose?.addEventListener('click', closeLightbox);
+  lightboxModal?.addEventListener('click', (e) => {
+    if (e.target === lightboxModal) {
+      closeLightbox();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeLightbox();
+    }
+  });
+</script>

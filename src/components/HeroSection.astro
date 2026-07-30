@@ -1,0 +1,131 @@
+---
+// Exact sequence of 11 active hero slides from images/hero-home/
+const HERO_SLIDE_PATHS = [
+  '/images/hero-home/1.webp',
+  '/images/hero-home/1.1.webp',
+  '/images/hero-home/2.webp',
+  '/images/hero-home/2.1.webp',
+  '/images/hero-home/3.webp',
+  '/images/hero-home/3.1.webp',
+  '/images/hero-home/4.webp',
+  '/images/hero-home/5.webp',
+  '/images/hero-home/6.webp',
+  '/images/hero-home/7.webp',
+  '/images/hero-home/8.webp',
+];
+---
+
+<!-- Hero Section: pt-[44px] on mobile (compact solid nav), pt-0 on desktop (translucent nav over slideshow) -->
+<section class="relative w-full pt-[44px] md:pt-0 bg-black overflow-hidden select-none">
+  
+  <!-- Slide Image Container (Full Uncropped Image View) -->
+  <div id="hero-slides-container" class="relative w-full aspect-[4/3] md:aspect-auto md:h-screen min-h-[280px] md:min-h-[600px] flex items-center justify-center bg-black">
+    {HERO_SLIDE_PATHS.map((path, index) => (
+      <div
+        data-hero-slide
+        data-index={index}
+        class={`absolute inset-0 w-full h-full flex items-center justify-center transition-opacity duration-700 ease-in-out ${
+          index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'
+        }`}
+      >
+        <img
+          src={path}
+          alt={`Hero Slide ${index + 1}`}
+          class="w-full h-full object-contain md:object-cover object-center"
+          loading={index === 0 ? 'eager' : 'lazy'}
+        />
+      </div>
+    ))}
+
+    <!-- Subtle Gold Radial Glow Aura behind Hero Center -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-15">
+      <div class="w-[600px] h-[600px] rounded-full bg-[#C9A84C]/5 blur-[140px] pointer-events-none"></div>
+    </div>
+
+    <!-- Soft Bottom Gradient Vignette for Contrast & Legibility -->
+    <div class="absolute bottom-0 left-0 right-0 h-20 md:h-32 bg-gradient-to-t from-black/85 via-black/35 to-transparent pointer-events-none z-20"></div>
+
+    <!-- Compact Mobile Stretched Vertical Left Arrow Button (<) -->
+    <button
+      id="hero-prev-btn"
+      aria-label="Previous Slide"
+      class="absolute left-0 top-0 bottom-0 z-30 w-10 md:w-24 flex items-center justify-start pl-1 md:pl-8 text-ivory/80 hover:text-gold transition-all duration-300 hover:bg-gradient-to-r hover:from-black/50 hover:to-transparent group cursor-pointer"
+    >
+      <span class="font-serif text-4xl md:text-8xl font-light transform scale-y-[1.8] group-hover:scale-y-[2.1] transition-transform drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)]">
+        &lt;
+      </span>
+    </button>
+
+    <!-- Compact Mobile Stretched Vertical Right Arrow Button (>) -->
+    <button
+      id="hero-next-btn"
+      aria-label="Next Slide"
+      class="absolute right-0 top-0 bottom-0 z-30 w-10 md:w-24 flex items-center justify-end pr-1 md:pr-8 text-ivory/80 hover:text-gold transition-all duration-300 hover:bg-gradient-to-l hover:from-black/50 hover:to-transparent group cursor-pointer"
+    >
+      <span class="font-serif text-4xl md:text-8xl font-light transform scale-y-[1.8] group-hover:scale-y-[2.1] transition-transform drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)]">
+        &gt;
+      </span>
+    </button>
+
+    <!-- Ultra-Luxury Minimalist Explore Indicator -->
+    <div
+      id="explore-btn"
+      class="absolute bottom-2 md:bottom-6 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-0.5 md:gap-1 cursor-pointer group"
+    >
+      <span class="text-[8px] md:text-[10px] uppercase tracking-[0.35em] text-gold font-medium group-hover:text-ivory transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
+        EXPLORE
+      </span>
+      <div class="w-5 h-5 md:w-8 md:h-8 rounded-full border border-gold/50 bg-black/40 backdrop-blur-[2px] flex items-center justify-center text-gold group-hover:border-gold group-hover:bg-gold/20 transition-all duration-300 animate-bounce shadow-[0_4px_16px_rgba(0,0,0,0.6)]">
+        <svg class="w-2.5 h-2.5 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"/></svg>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('[data-hero-slide]');
+  const totalSlides = slides.length;
+
+  function showSlide(index: number) {
+    slides.forEach((slide, i) => {
+      if (i === index) {
+        (slide as HTMLElement).style.opacity = '1';
+        (slide as HTMLElement).style.zIndex = '10';
+      } else {
+        (slide as HTMLElement).style.opacity = '0';
+        (slide as HTMLElement).style.zIndex = '0';
+      }
+    });
+    currentSlide = index;
+  }
+
+  function nextSlide() {
+    showSlide((currentSlide + 1) % totalSlides);
+  }
+
+  function prevSlide() {
+    showSlide((currentSlide - 1 + totalSlides) % totalSlides);
+  }
+
+  // 3.5-Second Auto Timer
+  const timer = setInterval(nextSlide, 3500);
+
+  document.getElementById('hero-prev-btn')?.addEventListener('click', () => {
+    prevSlide();
+    clearInterval(timer);
+  });
+
+  document.getElementById('hero-next-btn')?.addEventListener('click', () => {
+    nextSlide();
+    clearInterval(timer);
+  });
+
+  document.getElementById('explore-btn')?.addEventListener('click', () => {
+    window.scrollTo({
+      top: window.innerHeight - 40,
+      behavior: 'smooth',
+    });
+  });
+</script>
