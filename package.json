@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@astrojs/tailwind": "^6.0.2",
-    "astro": "^7.1.5",
+    "astro": "^5.4.0",
     "clsx": "^2.1.1",
     "framer-motion": "^12.4.10",
     "lucide-react": "^1.16.0",
