@@ -94,11 +94,11 @@ const krishnanPhone2Raw = SITE_CONFIG.contacts.krishnan.phone2Raw;
         <h3 class="font-editorial text-xs md:text-base text-gold tracking-widest uppercase font-semibold border-b border-gold/30 pb-1 inline-block">
           Branch Network
         </h3>
-        <div class="grid grid-cols-2 gap-2.5 text-xs">
+        <div class="grid grid-cols-2 md:grid-cols-1 gap-2 text-xs">
           {SITE_CONFIG.branches.map((b) => (
             <div class="px-3 py-2 rounded-md bg-white/[0.04] border border-gold/20 hover:border-gold/60 transition-all flex items-center justify-between text-ivory group">
               <span class="font-semibold text-gold text-xs md:text-sm group-hover:translate-x-0.5 transition-transform">{b.city}</span>
-              <span class="text-[9px] md:text-[10px] text-ivory/50 font-medium uppercase tracking-wider">{b.isHQ ? 'HQ' : 'Branch'}</span>
+              <span class="text-[9px] md:text-[10px] text-ivory/50 font-medium uppercase tracking-wider shrink-0 ml-2">{b.isHQ ? 'HQ' : 'Branch'}</span>
             </div>
           ))}
         </div>
