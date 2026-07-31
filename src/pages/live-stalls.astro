@@ -142,9 +142,10 @@ const FILTER_PILLS = [
     id="lightbox-modal"
     class="fixed inset-0 z-[200] flex flex-col items-center justify-between bg-black/95 backdrop-blur-2xl opacity-0 pointer-events-none transition-all duration-300 p-4 sm:p-6"
   >
-    <!-- Top Control Bar (Close & Counter) -->
+    <!-- Top Control Bar (Close & Desktop Counter) -->
     <div class="flex items-center justify-between w-full max-w-6xl z-50 pt-2 pb-2">
-      <span id="lightbox-counter" class="text-xs sm:text-sm tracking-widest uppercase text-gold/80 font-mono font-medium"></span>
+      <span id="lightbox-counter" class="text-xs sm:text-sm tracking-widest uppercase text-gold/80 font-mono font-medium hidden md:inline-block"></span>
+      <div class="md:hidden"></div>
       <button
         id="lightbox-close"
         aria-label="Close Lightbox"
@@ -154,34 +155,34 @@ const FILTER_PILLS = [
       </button>
     </div>
 
-    <!-- Center Gallery Container with Prev / Next Arrows -->
-    <div class="relative w-full max-w-5xl flex-1 flex flex-col items-center justify-center my-auto min-h-0 space-y-3">
-      <!-- Left Arrow -->
+    <!-- Center Gallery Container -->
+    <div class="relative w-full max-w-4xl lg:max-w-5xl flex-1 flex flex-col items-center justify-center my-auto min-h-0 space-y-3">
+      <!-- Left Arrow (PC ONLY - OUTSIDE Image Box) -->
       <button
         id="lightbox-prev"
         aria-label="Previous Image"
-        class="absolute left-1 sm:left-3 md:left-6 top-1/2 -translate-y-1/2 z-50 w-10 h-10 sm:w-13 sm:h-13 md:w-14 md:h-14 rounded-full bg-black/80 backdrop-blur-md border border-gold/50 text-gold hover:bg-gold hover:text-charcoal transition-all flex items-center justify-center shadow-2xl cursor-pointer hover:scale-110 active:scale-95"
+        class="hidden md:flex absolute -left-16 lg:-left-20 top-1/2 -translate-y-1/2 z-50 w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-charcoal/90 border border-gold/50 text-gold hover:bg-gold hover:text-charcoal transition-all items-center justify-center shadow-2xl cursor-pointer hover:scale-110 active:scale-95"
       >
-        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
       </button>
 
-      <!-- Image Box -->
-      <div class="relative w-full max-h-[65vh] sm:max-h-[72vh] flex items-center justify-center overflow-hidden rounded-2xl border border-gold/40 shadow-2xl bg-charcoal/40">
+      <!-- Image Box (100% Unobstructed on Mobile) -->
+      <div class="relative w-full max-h-[58vh] sm:max-h-[68vh] flex items-center justify-center overflow-hidden rounded-2xl border border-gold/40 shadow-2xl bg-charcoal/40">
         <img
           id="lightbox-img"
           src=""
           alt=""
-          class="max-w-full max-h-[65vh] sm:max-h-[72vh] object-contain rounded-2xl transition-opacity duration-200"
+          class="max-w-full max-h-[58vh] sm:max-h-[68vh] object-contain rounded-2xl transition-opacity duration-200"
         />
       </div>
 
-      <!-- Right Arrow -->
+      <!-- Right Arrow (PC ONLY - OUTSIDE Image Box) -->
       <button
         id="lightbox-next"
         aria-label="Next Image"
-        class="absolute right-1 sm:right-3 md:right-6 top-1/2 -translate-y-1/2 z-50 w-10 h-10 sm:w-13 sm:h-13 md:w-14 md:h-14 rounded-full bg-black/80 backdrop-blur-md border border-gold/50 text-gold hover:bg-gold hover:text-charcoal transition-all flex items-center justify-center shadow-2xl cursor-pointer hover:scale-110 active:scale-95"
+        class="hidden md:flex absolute -right-16 lg:-right-20 top-1/2 -translate-y-1/2 z-50 w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-charcoal/90 border border-gold/50 text-gold hover:bg-gold hover:text-charcoal transition-all items-center justify-center shadow-2xl cursor-pointer hover:scale-110 active:scale-95"
       >
-        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
       </button>
 
       <!-- Title & Tag Caption -->
@@ -189,6 +190,26 @@ const FILTER_PILLS = [
         <span id="lightbox-tag" class="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-gold font-medium block"></span>
         <h3 id="lightbox-title" class="font-editorial text-xl sm:text-3xl text-ivory font-normal leading-tight"></h3>
       </div>
+
+      <!-- Mobile Direction Controls Below Title (ONLY on Mobile) -->
+      <div class="flex md:hidden items-center justify-center gap-6 pt-2 pb-1">
+        <button
+          id="lightbox-prev-mobile"
+          aria-label="Previous Image"
+          class="w-11 h-11 rounded-full bg-charcoal/90 border border-gold/50 text-gold active:bg-gold active:text-charcoal flex items-center justify-center shadow-lg cursor-pointer"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        <span id="lightbox-counter-mobile" class="text-xs tracking-widest uppercase text-gold/90 font-mono font-bold"></span>
+        <button
+          id="lightbox-next-mobile"
+          aria-label="Next Image"
+          class="w-11 h-11 rounded-full bg-charcoal/90 border border-gold/50 text-gold active:bg-gold active:text-charcoal flex items-center justify-center shadow-lg cursor-pointer"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
     </div>
 
     <!-- Bottom Spacing Buffer -->
@@ -239,15 +260,18 @@ const FILTER_PILLS = [
     });
   });
 
-  // Enhanced Fullscreen Lightbox Modal Script with Prev/Next Navigation
+  // Enhanced Fullscreen Lightbox Modal Script
   const lightboxModal = document.getElementById('lightbox-modal');
   const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
   const lightboxTitle = document.getElementById('lightbox-title');
   const lightboxTag = document.getElementById('lightbox-tag');
   const lightboxCounter = document.getElementById('lightbox-counter');
+  const lightboxCounterMobile = document.getElementById('lightbox-counter-mobile');
   const lightboxClose = document.getElementById('lightbox-close');
   const lightboxPrev = document.getElementById('lightbox-prev');
   const lightboxNext = document.getElementById('lightbox-next');
+  const lightboxPrevMobile = document.getElementById('lightbox-prev-mobile');
+  const lightboxNextMobile = document.getElementById('lightbox-next-mobile');
 
   const triggerElements = Array.from(document.querySelectorAll('[data-lightbox-trigger]')) as HTMLElement[];
   let currentIndex = 0;
@@ -269,7 +293,10 @@ const FILTER_PILLS = [
     }
     if (lightboxTitle) lightboxTitle.textContent = title;
     if (lightboxTag) lightboxTag.textContent = tag;
-    if (lightboxCounter) lightboxCounter.textContent = `${currentIndex + 1} / ${triggerElements.length}`;
+    
+    const countStr = `${currentIndex + 1} / ${triggerElements.length}`;
+    if (lightboxCounter) lightboxCounter.textContent = countStr;
+    if (lightboxCounterMobile) lightboxCounterMobile.textContent = countStr;
   }
 
   triggerElements.forEach((trigger, idx) => {
@@ -298,6 +325,8 @@ const FILTER_PILLS = [
   lightboxClose?.addEventListener('click', closeLightbox);
   lightboxPrev?.addEventListener('click', showPrev);
   lightboxNext?.addEventListener('click', showNext);
+  lightboxPrevMobile?.addEventListener('click', showPrev);
+  lightboxNextMobile?.addEventListener('click', showNext);
 
   lightboxModal?.addEventListener('click', (e) => {
     if (e.target === lightboxModal) {
