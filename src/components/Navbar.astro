@@ -80,13 +80,19 @@ const NAV_LINKS = [
       </a>
     </div>
 
-    <!-- Compact Mobile Menu Toggle Button -->
+    <!-- Exclusive Luxury Mobile Menu Toggle Button (High-Contrast MENU + 3-Bar Icon) -->
     <button
       id="mobile-toggle"
       aria-label="Toggle Navigation Menu"
-      class="md:hidden text-ivory hover:text-gold p-1 transition-colors focus:outline-none drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]"
+      class="md:hidden flex items-center gap-2 px-3 py-1.5 rounded-full bg-charcoal/90 border border-gold/60 text-gold shadow-[0_2px_12px_rgba(212,175,55,0.35)] hover:bg-gold hover:text-charcoal transition-all cursor-pointer font-bold text-xs uppercase tracking-widest active:scale-95 drop-shadow-md"
     >
-      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
+      <span class="text-[10px] tracking-[0.2em]">MENU</span>
+      <svg id="hamburger-icon" class="w-4 h-4 text-gold shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+      <svg id="close-icon" class="w-4 h-4 text-gold shrink-0 hidden transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
     </button>
   </div>
 
@@ -121,7 +127,8 @@ const NAV_LINKS = [
   const navbar = document.getElementById('navbar');
   const mobileToggle = document.getElementById('mobile-toggle');
   const mobileDrawer = document.getElementById('mobile-drawer');
-  const mobileDrawerClose = document.getElementById('mobile-drawer-close');
+  const hamburgerIcon = document.getElementById('hamburger-icon');
+  const closeIcon = document.getElementById('close-icon');
 
   window.addEventListener('scroll', () => {
     // Only apply scroll backdrop changes on desktop screens (md:)
@@ -145,10 +152,14 @@ const NAV_LINKS = [
       mobileDrawer.style.maxHeight = mobileDrawer.scrollHeight + 'px';
       mobileDrawer.classList.remove('opacity-0');
       mobileDrawer.classList.add('opacity-100');
+      hamburgerIcon?.classList.add('hidden');
+      closeIcon?.classList.remove('hidden');
     } else {
       mobileDrawer.style.maxHeight = '0';
       mobileDrawer.classList.add('opacity-0');
       mobileDrawer.classList.remove('opacity-100');
+      hamburgerIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
     }
   }
 
