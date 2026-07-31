@@ -84,10 +84,10 @@ const NAV_LINKS = [
     <button
       id="mobile-toggle"
       aria-label="Toggle Navigation Menu"
-      class="md:hidden flex items-center gap-2 px-3 py-1.5 rounded-full bg-charcoal/90 border border-gold/60 text-gold shadow-[0_2px_12px_rgba(212,175,55,0.35)] hover:bg-gold hover:text-charcoal transition-all cursor-pointer font-bold text-xs uppercase tracking-widest active:scale-95 drop-shadow-md"
+      class="md:hidden flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-charcoal/80 border border-white/20 text-ivory hover:border-gold/60 transition-all cursor-pointer font-bold text-xs uppercase tracking-widest active:scale-95 drop-shadow-md"
     >
       <span class="text-[10px] tracking-[0.2em]">MENU</span>
-      <svg id="hamburger-icon" class="w-4 h-4 text-gold shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg id="hamburger-icon" class="w-4 h-4 text-ivory shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 6h16M4 12h16M4 18h16"/>
       </svg>
       <svg id="close-icon" class="w-4 h-4 text-gold shrink-0 hidden transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -146,7 +146,7 @@ const NAV_LINKS = [
   let drawerOpen = false;
 
   function toggleDrawer() {
-    if (!mobileDrawer) return;
+    if (!mobileDrawer || !mobileToggle) return;
     drawerOpen = !drawerOpen;
     if (drawerOpen) {
       mobileDrawer.style.maxHeight = mobileDrawer.scrollHeight + 'px';
@@ -154,12 +154,20 @@ const NAV_LINKS = [
       mobileDrawer.classList.add('opacity-100');
       hamburgerIcon?.classList.add('hidden');
       closeIcon?.classList.remove('hidden');
+
+      // Active Gold State when Open
+      mobileToggle.classList.add('border-gold', 'text-gold', 'bg-gold/20', 'shadow-[0_0_15px_rgba(212,175,55,0.4)]');
+      mobileToggle.classList.remove('border-white/20', 'text-ivory', 'bg-charcoal/80');
     } else {
       mobileDrawer.style.maxHeight = '0';
       mobileDrawer.classList.add('opacity-0');
       mobileDrawer.classList.remove('opacity-100');
       hamburgerIcon?.classList.remove('hidden');
       closeIcon?.classList.add('hidden');
+
+      // Revert to Unclicked/Inactive State when Closed
+      mobileToggle.classList.remove('border-gold', 'text-gold', 'bg-gold/20', 'shadow-[0_0_15px_rgba(212,175,55,0.4)]');
+      mobileToggle.classList.add('border-white/20', 'text-ivory', 'bg-charcoal/80');
     }
   }
 
