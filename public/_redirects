@@ -1,0 +1,2 @@
+# 301 Permanent Redirect from www to root domain
+https://www.anandhamcatters.com/* https://anandhamcatters.com/:splat 301
