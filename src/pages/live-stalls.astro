@@ -140,31 +140,59 @@ const FILTER_PILLS = [
   <!-- Full-Screen Lightbox Modal -->
   <div
     id="lightbox-modal"
-    class="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-xl opacity-0 pointer-events-none transition-all duration-300 p-4 sm:p-8"
+    class="fixed inset-0 z-[200] flex flex-col items-center justify-between bg-black/95 backdrop-blur-2xl opacity-0 pointer-events-none transition-all duration-300 p-4 sm:p-6"
   >
-    <button
-      id="lightbox-close"
-      aria-label="Close Lightbox"
-      class="absolute top-6 right-6 z-50 text-ivory/80 hover:text-gold text-4xl font-light w-12 h-12 flex items-center justify-center rounded-full bg-charcoal/80 border border-gold/40 transition-colors cursor-pointer"
-    >
-      ✕
-    </button>
+    <!-- Top Control Bar (Close & Counter) -->
+    <div class="flex items-center justify-between w-full max-w-6xl z-50 pt-2 pb-2">
+      <span id="lightbox-counter" class="text-xs sm:text-sm tracking-widest uppercase text-gold/80 font-mono font-medium"></span>
+      <button
+        id="lightbox-close"
+        aria-label="Close Lightbox"
+        class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-charcoal/90 border border-gold/50 text-ivory hover:text-gold hover:border-gold transition-all flex items-center justify-center cursor-pointer text-xl shadow-xl hover:scale-105 active:scale-95"
+      >
+        ✕
+      </button>
+    </div>
 
-    <div class="relative max-w-5xl w-full max-h-[90vh] flex flex-col items-center justify-center space-y-4">
-      <div class="relative w-full max-h-[78vh] flex items-center justify-center overflow-hidden rounded-2xl border border-gold/40 shadow-2xl">
+    <!-- Center Gallery Container with Prev / Next Arrows -->
+    <div class="relative w-full max-w-5xl flex-1 flex flex-col items-center justify-center my-auto min-h-0 space-y-3">
+      <!-- Left Arrow -->
+      <button
+        id="lightbox-prev"
+        aria-label="Previous Image"
+        class="absolute left-1 sm:left-3 md:left-6 top-1/2 -translate-y-1/2 z-50 w-10 h-10 sm:w-13 sm:h-13 md:w-14 md:h-14 rounded-full bg-black/80 backdrop-blur-md border border-gold/50 text-gold hover:bg-gold hover:text-charcoal transition-all flex items-center justify-center shadow-2xl cursor-pointer hover:scale-110 active:scale-95"
+      >
+        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+      </button>
+
+      <!-- Image Box -->
+      <div class="relative w-full max-h-[65vh] sm:max-h-[72vh] flex items-center justify-center overflow-hidden rounded-2xl border border-gold/40 shadow-2xl bg-charcoal/40">
         <img
           id="lightbox-img"
           src=""
           alt=""
-          class="max-w-full max-h-[78vh] object-contain rounded-2xl"
+          class="max-w-full max-h-[65vh] sm:max-h-[72vh] object-contain rounded-2xl transition-opacity duration-200"
         />
       </div>
 
-      <div class="text-center space-y-1">
-        <span id="lightbox-tag" class="text-[11px] uppercase tracking-[0.25em] text-gold font-medium block"></span>
-        <h3 id="lightbox-title" class="font-editorial text-2xl sm:text-3xl text-ivory font-normal"></h3>
+      <!-- Right Arrow -->
+      <button
+        id="lightbox-next"
+        aria-label="Next Image"
+        class="absolute right-1 sm:right-3 md:right-6 top-1/2 -translate-y-1/2 z-50 w-10 h-10 sm:w-13 sm:h-13 md:w-14 md:h-14 rounded-full bg-black/80 backdrop-blur-md border border-gold/50 text-gold hover:bg-gold hover:text-charcoal transition-all flex items-center justify-center shadow-2xl cursor-pointer hover:scale-110 active:scale-95"
+      >
+        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+      </button>
+
+      <!-- Title & Tag Caption -->
+      <div class="text-center space-y-1 px-4 py-1">
+        <span id="lightbox-tag" class="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-gold font-medium block"></span>
+        <h3 id="lightbox-title" class="font-editorial text-xl sm:text-3xl text-ivory font-normal leading-tight"></h3>
       </div>
     </div>
+
+    <!-- Bottom Spacing Buffer -->
+    <div class="h-2"></div>
   </div>
 </Layout>
 
@@ -177,7 +205,6 @@ const FILTER_PILLS = [
     pill.addEventListener('click', () => {
       const filterId = (pill as HTMLElement).dataset.stallFilter;
 
-      // Update Pill Button Active States with Subtle Scale Pulse
       filterPills.forEach((p) => {
         if ((p as HTMLElement).dataset.stallFilter === filterId) {
           p.className =
@@ -188,12 +215,10 @@ const FILTER_PILLS = [
         }
       });
 
-      // Smooth Fade & Scale Transition for Category Blocks
       categoryBlocks.forEach((block) => {
         const catGroup = (block as HTMLElement).dataset.stallCategory;
         const isMatch = filterId === 'all' || catGroup === filterId;
 
-        // Phase 1: Smooth fade out & scale down
         (block as HTMLElement).style.transition = 'all 180ms ease-in';
         (block as HTMLElement).style.opacity = '0';
         (block as HTMLElement).style.transform = 'scale(0.97)';
@@ -201,7 +226,6 @@ const FILTER_PILLS = [
         setTimeout(() => {
           if (isMatch) {
             (block as HTMLElement).classList.remove('hidden');
-            // Phase 2: Smooth fade in & scale back to normal
             setTimeout(() => {
               (block as HTMLElement).style.transition = 'all 380ms cubic-bezier(0.16, 1, 0.3, 1)';
               (block as HTMLElement).style.opacity = '1';
@@ -215,25 +239,42 @@ const FILTER_PILLS = [
     });
   });
 
-  // Fullscreen Lightbox Modal Script
+  // Enhanced Fullscreen Lightbox Modal Script with Prev/Next Navigation
   const lightboxModal = document.getElementById('lightbox-modal');
   const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
   const lightboxTitle = document.getElementById('lightbox-title');
   const lightboxTag = document.getElementById('lightbox-tag');
+  const lightboxCounter = document.getElementById('lightbox-counter');
   const lightboxClose = document.getElementById('lightbox-close');
-  const triggers = document.querySelectorAll('[data-lightbox-trigger]');
+  const lightboxPrev = document.getElementById('lightbox-prev');
+  const lightboxNext = document.getElementById('lightbox-next');
 
-  triggers.forEach((trigger) => {
+  const triggerElements = Array.from(document.querySelectorAll('[data-lightbox-trigger]')) as HTMLElement[];
+  let currentIndex = 0;
+
+  function updateLightbox(index: number) {
+    if (!triggerElements.length || index < 0 || index >= triggerElements.length) return;
+    currentIndex = index;
+    const el = triggerElements[currentIndex];
+    const src = el.dataset.src || '';
+    const title = el.dataset.title || '';
+    const tag = el.dataset.tag || '';
+
+    if (lightboxImg) {
+      lightboxImg.style.opacity = '0.4';
+      setTimeout(() => {
+        lightboxImg.src = src;
+        lightboxImg.style.opacity = '1';
+      }, 120);
+    }
+    if (lightboxTitle) lightboxTitle.textContent = title;
+    if (lightboxTag) lightboxTag.textContent = tag;
+    if (lightboxCounter) lightboxCounter.textContent = `${currentIndex + 1} / ${triggerElements.length}`;
+  }
+
+  triggerElements.forEach((trigger, idx) => {
     trigger.addEventListener('click', () => {
-      const el = trigger as HTMLElement;
-      const src = el.dataset.src || '';
-      const title = el.dataset.title || '';
-      const tag = el.dataset.tag || '';
-
-      if (lightboxImg) lightboxImg.src = src;
-      if (lightboxTitle) lightboxTitle.textContent = title;
-      if (lightboxTag) lightboxTag.textContent = tag;
-
+      updateLightbox(idx);
       lightboxModal?.classList.remove('opacity-0', 'pointer-events-none');
       lightboxModal?.classList.add('opacity-100');
       document.body.style.overflow = 'hidden';
@@ -246,7 +287,18 @@ const FILTER_PILLS = [
     document.body.style.overflow = '';
   }
 
+  function showNext() {
+    updateLightbox((currentIndex + 1) % triggerElements.length);
+  }
+
+  function showPrev() {
+    updateLightbox((currentIndex - 1 + triggerElements.length) % triggerElements.length);
+  }
+
   lightboxClose?.addEventListener('click', closeLightbox);
+  lightboxPrev?.addEventListener('click', showPrev);
+  lightboxNext?.addEventListener('click', showNext);
+
   lightboxModal?.addEventListener('click', (e) => {
     if (e.target === lightboxModal) {
       closeLightbox();
@@ -254,8 +306,10 @@ const FILTER_PILLS = [
   });
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeLightbox();
+    if (lightboxModal?.classList.contains('opacity-100')) {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') showNext();
+      if (e.key === 'ArrowLeft') showPrev();
     }
   });
 </script>
