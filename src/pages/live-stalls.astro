@@ -273,13 +273,13 @@ const FILTER_PILLS = [
   const lightboxPrevMobile = document.getElementById('lightbox-prev-mobile');
   const lightboxNextMobile = document.getElementById('lightbox-next-mobile');
 
-  const triggerElements = Array.from(document.querySelectorAll('[data-lightbox-trigger]')) as HTMLElement[];
+  let currentGalleryElements: HTMLElement[] = [];
   let currentIndex = 0;
 
   function updateLightbox(index: number) {
-    if (!triggerElements.length || index < 0 || index >= triggerElements.length) return;
+    if (!currentGalleryElements.length || index < 0 || index >= currentGalleryElements.length) return;
     currentIndex = index;
-    const el = triggerElements[currentIndex];
+    const el = currentGalleryElements[currentIndex];
     const src = el.dataset.src || '';
     const title = el.dataset.title || '';
     const tag = el.dataset.tag || '';
@@ -294,14 +294,20 @@ const FILTER_PILLS = [
     if (lightboxTitle) lightboxTitle.textContent = title;
     if (lightboxTag) lightboxTag.textContent = tag;
     
-    const countStr = `${currentIndex + 1} / ${triggerElements.length}`;
+    const countStr = `${currentIndex + 1} / ${currentGalleryElements.length}`;
     if (lightboxCounter) lightboxCounter.textContent = countStr;
     if (lightboxCounterMobile) lightboxCounterMobile.textContent = countStr;
   }
 
-  triggerElements.forEach((trigger, idx) => {
-    trigger.addEventListener('click', () => {
-      updateLightbox(idx);
+  document.querySelectorAll('[data-lightbox-trigger]').forEach((trigger) => {
+    trigger.addEventListener('click', (e) => {
+      const targetEl = e.currentTarget as HTMLElement;
+      const parentBlock = targetEl.closest('[data-stall-category]') || document.body;
+      currentGalleryElements = Array.from(parentBlock.querySelectorAll('[data-lightbox-trigger]')) as HTMLElement[];
+      
+      const idx = currentGalleryElements.indexOf(targetEl);
+      updateLightbox(idx >= 0 ? idx : 0);
+
       lightboxModal?.classList.remove('opacity-0', 'pointer-events-none');
       lightboxModal?.classList.add('opacity-100');
       document.body.style.overflow = 'hidden';
@@ -315,15 +321,17 @@ const FILTER_PILLS = [
   }
 
   function showNext() {
-    updateLightbox((currentIndex + 1) % triggerElements.length);
+    if (!currentGalleryElements.length) return;
+    updateLightbox((currentIndex + 1) % currentGalleryElements.length);
   }
 
   function showPrev() {
-    updateLightbox((currentIndex - 1 + triggerElements.length) % triggerElements.length);
+    if (!currentGalleryElements.length) return;
+    updateLightbox((currentIndex - 1 + currentGalleryElements.length) % currentGalleryElements.length);
   }
 
   lightboxClose?.addEventListener('click', closeLightbox);
-  lightboxPrev?.addEventListener('click', showPrev);
+  lightboxPrev?.addEventListener('click', showNext);
   lightboxNext?.addEventListener('click', showNext);
   lightboxPrevMobile?.addEventListener('click', showPrev);
   lightboxNextMobile?.addEventListener('click', showNext);
