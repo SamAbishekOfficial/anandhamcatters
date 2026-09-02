@@ -22,15 +22,51 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": ["LocalBusiness", "CateringService"],
-      "name": SITE_CONFIG.name,
+      "@type": "WebSite",
+      "@id": `${SITE_CONFIG.url}/#website`,
       "url": SITE_CONFIG.url,
-      "logo": ogImage,
-      "image": ogImage,
+      "name": "Anandham Catters",
+      "alternateName": ["Anandham Catering Services", "ஆனந்தம் கேட்டரிங்", "Anandham Catters Tamil Nadu"],
       "description": SITE_CONFIG.description,
+      "inLanguage": ["en-IN", "ta-IN"]
+    },
+    {
+      "@type": ["LocalBusiness", "CateringService", "FoodEstablishment"],
+      "@id": `${SITE_CONFIG.url}/#organization`,
+      "name": "Anandham Catters",
+      "legalName": "Anandham Catters & Royal Event Banquets",
+      "alternateName": "Anandham Catering Services Erode",
+      "url": SITE_CONFIG.url,
+      "logo": {
+        "@type": "ImageObject",
+        "url": ogImage,
+        "width": 1200,
+        "height": 630
+      },
+      "image": [
+        ogImage,
+        `${SITE_CONFIG.url}/images/Stall%20view.webp`,
+        `${SITE_CONFIG.url}/images/buffets/illuminated_stall_canopy_corridor.webp`
+      ],
+      "description": "Tamil Nadu's premier catering service delivering authentic grand wedding feasts, 26-dish traditional banana leaf virundhu, 19+ live interactive food stations, and royal buffet setups across all 38 districts.",
       "telephone": SITE_CONFIG.contacts.krishnan.phone1Raw,
       "email": SITE_CONFIG.email,
       "priceRange": "₹₹",
+      "currenciesAccepted": "INR",
+      "paymentAccepted": "Cash, Credit Card, UPI, Bank Transfer",
+      "foundingDate": "2010",
+      "founder": [
+        {
+          "@type": "Person",
+          "name": "Elango",
+          "telephone": SITE_CONFIG.contacts.elango.phoneRaw
+        },
+        {
+          "@type": "Person",
+          "name": "Krishnan",
+          "telephone": SITE_CONFIG.contacts.krishnan.phone1Raw
+        }
+      ],
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "66G, Rajiv Nagar, Moolapalayam",
@@ -44,18 +80,157 @@ const jsonLd = {
         "latitude": 11.341,
         "longitude": 77.7172
       },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+          ],
+          "opens": "00:00",
+          "closes": "23:59"
+        }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Anandham Catters Culinary & Rental Services",
+        "itemListElement": [
+          {
+            "@type": "OfferCatalog",
+            "name": "Grand Wedding Catering (Banana Leaf Virundhu)",
+            "description": "Authentic 26+ item traditional South Indian wedding feasts crafted with cold-pressed oils, pure ghee, and master culinary precision."
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "19+ Interactive Live Food Stalls",
+            "description": "Live Pani Puri, Chocolate Fountains, Fruit Carving Islands, Fresh Botanical Juice Bars, Live Kulfi Counters, 90s Petty Shop Stalls, and Royal Paan Bars."
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "Royal Buffet Setups & Canopy Architecture",
+            "description": "Illuminated food canopies, brass samovars, stainless roll-top chafing setups, and luxury food counter layouts."
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "Banquet Furniture & Cooking Utensil Rentals",
+            "description": "VVIP banquet chairs, dining tables, commercial burners, traditional copper cauldrons, and event logistics rentals."
+          }
+        ]
+      },
       "areaServed": [
         { "@type": "State", "name": "Tamil Nadu" },
         { "@type": "City", "name": "Erode" },
         { "@type": "City", "name": "Madurai" },
         { "@type": "City", "name": "Thoothukudi" },
-        { "@type": "City", "name": "Karaikudi" }
+        { "@type": "City", "name": "Karaikudi" },
+        { "@type": "City", "name": "Coimbatore" },
+        { "@type": "City", "name": "Chennai" },
+        { "@type": "City", "name": "Salem" },
+        { "@type": "City", "name": "Tiruchirappalli" },
+        { "@type": "City", "name": "Tirunelveli" },
+        { "@type": "City", "name": "Vellore" },
+        { "@type": "City", "name": "Thanjavur" },
+        { "@type": "City", "name": "Dindigul" },
+        { "@type": "City", "name": "Tiruppur" },
+        { "@type": "City", "name": "Namakkal" },
+        { "@type": "City", "name": "Karur" },
+        { "@type": "City", "name": "The Nilgiris" },
+        { "@type": "City", "name": "Dharmapuri" },
+        { "@type": "City", "name": "Krishnagiri" },
+        { "@type": "City", "name": "Cuddalore" },
+        { "@type": "City", "name": "Kanchipuram" },
+        { "@type": "City", "name": "Chengalpattu" },
+        { "@type": "City", "name": "Tiruvannamalai" },
+        { "@type": "City", "name": "Villupuram" },
+        { "@type": "City", "name": "Kallakurichi" },
+        { "@type": "City", "name": "Mayiladuthurai" },
+        { "@type": "City", "name": "Nagapattinam" },
+        { "@type": "City", "name": "Tiruvarur" },
+        { "@type": "City", "name": "Pudukkottai" },
+        { "@type": "City", "name": "Sivagangai" },
+        { "@type": "City", "name": "Ramanathapuram" },
+        { "@type": "City", "name": "Virudhunagar" },
+        { "@type": "City", "name": "Tenkasi" },
+        { "@type": "City", "name": "Theni" },
+        { "@type": "City", "name": "Perambalur" },
+        { "@type": "City", "name": "Ariyalur" },
+        { "@type": "City", "name": "Ranipet" },
+        { "@type": "City", "name": "Tirupattur" },
+        { "@type": "City", "name": "Tiruvallur" },
+        { "@type": "City", "name": "Kanyakumari" }
+      ],
+      "knowsAbout": [
+        "South Indian Wedding Catering",
+        "Traditional Banana Leaf Virundhu",
+        "Live Food Stalls for Weddings",
+        "Pani Puri & Chaat Counters",
+        "Chocolate Fountains",
+        "Royal Buffet Catering",
+        "Event Utensil & Banquet Chair Rentals",
+        "Tamil Brahmin Wedding Feasts",
+        "Kongu Nadu & Chettinad Wedding Banquets"
       ],
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "4.9",
+        "bestRating": "5",
+        "worstRating": "1",
+        "ratingCount": "1500",
         "reviewCount": "1500"
-      }
+      },
+      "department": [
+        {
+          "@type": "LocalBusiness",
+          "name": "Anandham Catters — Erode State Headquarters",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "66G, Rajiv Nagar, Moolapalayam",
+            "addressLocality": "Erode",
+            "addressRegion": "Tamil Nadu",
+            "postalCode": "638002",
+            "addressCountry": "IN"
+          },
+          "telephone": "+919865295491"
+        },
+        {
+          "@type": "LocalBusiness",
+          "name": "Anandham Catters — Madurai Branch",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Othakadai, Anjali Oil Mill Opposite",
+            "addressLocality": "Madurai",
+            "addressRegion": "Tamil Nadu",
+            "postalCode": "625107",
+            "addressCountry": "IN"
+          },
+          "telephone": "+919865295491"
+        },
+        {
+          "@type": "LocalBusiness",
+          "name": "Anandham Catters — Thoothukudi Branch",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Gomathi Bhai Colony, Neero Building",
+            "addressLocality": "Thoothukudi",
+            "addressRegion": "Tamil Nadu",
+            "postalCode": "628001",
+            "addressCountry": "IN"
+          },
+          "telephone": "+919865295491"
+        },
+        {
+          "@type": "LocalBusiness",
+          "name": "Anandham Catters — Karaikudi Branch",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Ezhil Nagar",
+            "addressLocality": "Karaikudi",
+            "addressRegion": "Tamil Nadu",
+            "postalCode": "630002",
+            "addressCountry": "IN"
+          },
+          "telephone": "+919865295491"
+        }
+      ]
     }
   ]
 };
@@ -74,13 +249,31 @@ const whatsappUrl = SITE_CONFIG.whatsappUrl;
     <link rel="apple-touch-icon" href="/images/anandham_logo.webp" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="keywords" content="Anandham Catters, catering services Erode, wedding catering Tamil Nadu, live food stalls, buffet catering Erode, marriage catering Madurai, Thoothukudi catering, Karaikudi catering, South Indian virundhu" />
+    <meta name="keywords" content="Anandham Catters, best catering service in Tamil Nadu, wedding catering Tamil Nadu, live food stalls for marriage, buffet catering Erode, marriage catering Madurai, Thoothukudi catering, Karaikudi catering, Coimbatore catering, Chennai wedding caterer, South Indian banana leaf virundhu, catering equipment rental Tamil Nadu" />
     <link rel="canonical" href={canonicalUrl} />
 
-    <!-- Open Graph / Facebook / WhatsApp Meta Tags -->
+    <!-- GEO-Targeting & Location Metadata (Crucial for Local Search #1 Ranking) -->
+    <meta name="geo.region" content="IN-TN" />
+    <meta name="geo.placename" content="Erode, Tamil Nadu, India" />
+    <meta name="geo.position" content="11.3410;77.7172" />
+    <meta name="ICBM" content="11.3410, 77.7172" />
+
+    <!-- Dublin Core Metadata for Archival & Academic/Enterprise Search -->
+    <meta name="DC.title" content={title} />
+    <meta name="DC.creator" content="Anandham Catters" />
+    <meta name="DC.coverage" content="Tamil Nadu, India" />
+    <meta name="DC.description" content={description} />
+    <meta name="DC.language" content="en, ta" />
+
+    <!-- Search Engine & AI Bot Indexing Directives -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+    <!-- Open Graph / Facebook / WhatsApp / LinkedIn Meta Tags -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:site_name" content={SITE_CONFIG.name} />
+    <meta property="og:site_name" content="Anandham Catters" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
@@ -88,16 +281,18 @@ const whatsappUrl = SITE_CONFIG.whatsappUrl;
     <meta property="og:image:type" content="image/webp" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Anandham Catters Logo" />
+    <meta property="og:image:alt" content="Anandham Catters - Premier Indian Catering & Royal Buffets" />
     <meta property="og:locale" content="en_IN" />
 
-    <!-- Twitter Card Meta Tags -->
+    <!-- Twitter / X Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content={canonicalUrl} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content="Anandham Catters" />
 
+    <!-- Structured JSON-LD Graph for Google Rich Snippets & AI Answer Engines -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body class="bg-ivory text-charcoal min-h-screen flex flex-col antialiased">

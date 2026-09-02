@@ -21,7 +21,22 @@ const FAQS = [
     answer: "For peak wedding dates, we recommend booking 2 to 4 months in advance to guarantee date availability and live stall setup allocations."
   }
 ];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": FAQS.map((faq) => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+};
 ---
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
 <section class="py-8 sm:py-14 bg-ivory relative">
   <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
