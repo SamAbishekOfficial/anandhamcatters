@@ -7,4 +7,5 @@ export default defineConfig({
     applyBaseStyles: false
   })],
   site: 'https://anandhamcatters.com',
+  trailingSlash: 'always',
 });
