@@ -24,7 +24,7 @@ const HERO_SLIDE_PATHS = [
       <div
         data-hero-slide
         data-index={index}
-        class={`absolute inset-0 w-full h-full flex items-center justify-center transition-opacity duration-700 ease-in-out ${
+        class={`absolute inset-0 w-full h-full flex items-center justify-center transition-opacity duration-[1200ms] ease-[cubic-bezier(0.4,0,0.2,1)] ${
           index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'
         }`}
       >
@@ -109,8 +109,8 @@ const HERO_SLIDE_PATHS = [
     showSlide((currentSlide - 1 + totalSlides) % totalSlides);
   }
 
-  // 3.5-Second Auto Timer
-  const timer = setInterval(nextSlide, 3500);
+  // 5.0-Second Silky Auto Timer
+  const timer = setInterval(nextSlide, 5000);
 
   document.getElementById('hero-prev-btn')?.addEventListener('click', () => {
     prevSlide();
